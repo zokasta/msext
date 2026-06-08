@@ -1,50 +1,78 @@
-#pdf-json-btn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+body {
+  width: 300px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 15px;
+  background-color: #f8fafc;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+h2 {
+  font-size: 15px;
+  margin: 0 0 10px 0;
+  color: #1e3a8a;
+  text-align: center;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background: #e2e8f0;
+  margin-bottom: 15px;
+}
+.info-text {
+  font-size: 12px;
+  margin: 0 0 8px 0;
+  color: #64748b;
+  font-weight: bold;
+}
+button {
+  width: 100%;
+  height: 40px;
   border: none;
+  border-radius: 6px;
   background: #2563eb;
   color: white;
-  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  z-index: 2147483647;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
-
-#pdf-json-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 450px;
-  height: 100vh;
-  background: white;
-  z-index: 2147483647;
-  overflow-y: auto;
-  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  font-family: Arial;
+button:hover {
+  background: #1d4ed8;
 }
-
-.pdf-field {
-  margin-bottom: 12px;
-}
-
-.pdf-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.pdf-value {
+.divider {
   display: flex;
-  gap: 10px;
   align-items: center;
+  text-align: center;
+  margin: 15px 0;
+  color: #cbd5e1;
+  font-size: 11px;
 }
-
-.copy-btn {
-  padding: 4px 8px;
-  cursor: pointer;
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+.divider span {
+  padding: 0 10px;
+}
+input[type="file"] {
+  font-size: 11px;
+  color: #64748b;
+}
+.status-msg {
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+.success {
+  color: #16a34a;
+}
+.error {
+  color: #dc2626;
+}
+.loading {
+  color: #d97706;
 }

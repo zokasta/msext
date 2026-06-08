@@ -1,54 +1,17 @@
-chrome.runtime.onInstalled.addListener(() => {
-  console.log("Tender PDF Extractor Loaded");
-});
-
-chrome.commands.onCommand.addListener(async (command) => {
-
-  if (command !== "extract-pdf") {
-      return;
-  }
-
-  const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true
-  });
-
-  if (!tab?.id) {
-      return;
-  }
-
-  chrome.tabs.sendMessage(
-      tab.id,
-      {
-          action: "extractPdf"
+chrome.commands.onCommand.addListener((command) => {
+  if (command === "toggle-pdf-extractor") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]) {
+        if (
+          tabs[0].url.startsWith("chrome://") ||
+          tabs[0].url.startsWith("chrome-extension://")
+        ) {
+          return; // Extensions cannot run on internal Chrome settings pages
+        }
+        chrome.tabs
+          .sendMessage(tabs[0].id, { action: "toggle-ui" })
+          .catch(() => {});
       }
-  );
-});
-
-chrome.runtime.onMessage.addListener(
-  async (message, sender, sendResponse) => {
-
-      if (message.action === "copyJson") {
-
-          try {
-
-              await navigator.clipboard.writeText(
-                  message.json
-              );
-
-              sendResponse({
-                  success: true
-              });
-
-          } catch (error) {
-
-              sendResponse({
-                  success: false,
-                  error: error.message
-              });
-          }
-
-          return true;
-      }
+    });
   }
-);
+});
